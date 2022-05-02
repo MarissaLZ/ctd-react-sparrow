@@ -1,8 +1,8 @@
 import React from "react";
 import { useEffect } from "react/cjs/react.production.min";
+import InputWithLabel from "./InputWithLabel";
 
 export default function AddTodoForm({onAddTodo}) {
-    console.log("addtodoForm component state")
     //state hook
     const [todoTitle, setTodoTitle] = React.useState("")
 
@@ -20,9 +20,8 @@ export default function AddTodoForm({onAddTodo}) {
         setTodoTitle("") //updates state when form submitted
     }  
     return (
-        <form onSubmit={handleAddTodo} > 
-            <label htmlFor="todoTitle">Title</label>
-            <input id="todoTitle" type="text" name="title" value={todoTitle} onChange={handleTitleChange}/>
+        <form onSubmit={handleAddTodo} >
+            <InputWithLabel todoTitle= {todoTitle} handleTitleChange={handleTitleChange}>Title Test</InputWithLabel>
             <button type="submit">Add</button>
         </form> 
     )
