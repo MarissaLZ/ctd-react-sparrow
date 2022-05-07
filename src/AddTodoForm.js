@@ -14,7 +14,6 @@ export default function AddTodoForm({onAddTodo}) {
     //triggers when form submitted
     //event handler passes state info to share with state in app component
     const handleAddTodo = (event) => {
-        console.log("callback handleAddTodo")
         event.preventDefault()
         onAddTodo({id: Date.now(), title: todoTitle}) //passes object literal
         setTodoTitle("") //updates state when form submitted

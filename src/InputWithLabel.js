@@ -8,6 +8,7 @@ export default function InputWithLabel(props) {
     React.useEffect( () => {
         inputRef.current.focus()
     }, [])
+    // auto focus only remains in place w/ Enter key and not when clicking button
 
     return(
      <>

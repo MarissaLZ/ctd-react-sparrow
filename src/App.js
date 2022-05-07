@@ -1,22 +1,34 @@
 import React from 'react';
 import TodoList from './TodoList.js'
 import AddTodoForm from './AddTodoForm.js'
+import { useState } from 'react/cjs/react.production.min';
+import react from 'react';
 
-//custom hook
-const useSemiPersistentState = () => {
-  //useState hook
-  const [todoList, setTodoList] = React.useState(JSON.parse(localStorage.getItem("savedTodoList"))|| [])
+function App() {
   //todoList is an array value
+  const [todoList, setTodoList] = React.useState([])
+  const [isLoading, setIsLoading] = React.useState(true)
+
+  React.useEffect(() => {
+    //create new promise
+    new Promise( (resolve, reject ) => {
+      //mimic async task
+      setTimeout(()=> {
+        //pass data to resolve(). loads after initial render 
+        resolve( {data: {todoList: JSON.parse(localStorage.getItem("savedTodoList"))|| [] } } )},
+         200)})
+        .then((result) => {
+      setTodoList(result.data.todoList)
+      setIsLoading(false)
+    })
+  },[])
 
   //useEffect hook to store todoList
   React.useEffect( () => {
-    localStorage.setItem("savedTodoList" ,JSON.stringify(todoList))
-    }, [todoList])
-
-  return [todoList, setTodoList]
-}
-function App() {
-  const [todoList, setTodoList] = useSemiPersistentState()
+    if (isLoading === false) {
+    localStorage.setItem("savedTodoList", JSON.stringify(todoList))
+    }
+  }, [todoList,isLoading ])
 
   const addTodo = (newTodo) => {
     return(
@@ -36,7 +48,7 @@ function App() {
   <>
     <h1>Todo List</h1>
     <AddTodoForm onAddTodo={addTodo}/>
-    <TodoList todoList={todoList} onRemoveTodo={removeTodo}/>
+    { isLoading ? <p>Loading</p> : <TodoList todoList={todoList} onRemoveTodo={removeTodo}/>}
   </>
   );
 }
