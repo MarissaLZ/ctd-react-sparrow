@@ -4,23 +4,24 @@ import AddTodoForm from './AddTodoForm.js'
 import { useState } from 'react/cjs/react.production.min';
 import react from 'react';
 
+
 function App() {
   //todoList is an array value
   const [todoList, setTodoList] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
 
   React.useEffect(() => {
-    //create new promise
-    new Promise( (resolve, reject ) => {
-      //mimic async task
-      setTimeout(()=> {
-        //pass data to resolve(). loads after initial render 
-        resolve( {data: {todoList: JSON.parse(localStorage.getItem("savedTodoList"))|| [] } } )},
-         200)})
-        .then((result) => {
-      setTodoList(result.data.todoList)
+    //async task
+     //Headers contain metadata about the request, such as content type, user agent
+    fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`,{headers:{Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`}})
+    .then((response) => response.json())
+    .then((data) => {
+      //an array of objects
+      console.log(data.records)
+      setTodoList(data.records)
       setIsLoading(false)
     })
+    .catch((error) => console.log("error",error))
   },[])
 
   //useEffect hook to store todoList
