@@ -1,5 +1,4 @@
 import React from "react"
-import { useEffect } from "react/cjs/react.production.min"
 
 export default function InputWithLabel(props) {
     //useRef hook creates an imperative ref
