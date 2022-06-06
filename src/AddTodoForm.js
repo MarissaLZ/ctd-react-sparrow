@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react/cjs/react.production.min";
 import InputWithLabel from "./InputWithLabel";
 
 export default function AddTodoForm({onAddTodo}) {
@@ -12,7 +11,6 @@ export default function AddTodoForm({onAddTodo}) {
         setTodoTitle(newTodoTitle) //updates state every time something typed
     }
     //triggers when form submitted
-    //event handler passes state info to share with state in app component
     const handleAddTodo = (event) => {
         event.preventDefault()
         onAddTodo({ fields: {title: todoTitle} }) //passes object literal
@@ -20,7 +18,7 @@ export default function AddTodoForm({onAddTodo}) {
     }  
     return (
         <form onSubmit={handleAddTodo} >
-            <InputWithLabel todoTitle= {todoTitle} handleTitleChange={handleTitleChange}>Title Test</InputWithLabel>
+            <InputWithLabel todoTitle= {todoTitle} handleTitleChange={handleTitleChange}>Todo Title</InputWithLabel>
             <button type="submit">Add</button>
         </form> 
     )
