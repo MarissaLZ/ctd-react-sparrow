@@ -1,6 +1,7 @@
 import React from "react";
-import InputWithLabel from "./InputWithLabel";
-
+import InputWithLabel from "../InputWithLabel/InputWithLabel";
+import styles from "./AddTodoForm.module.css"
+import { BsPlusSquare } from 'react-icons/bs'
 export default function AddTodoForm({onAddTodo}) {
     //state hook
     const [todoTitle, setTodoTitle] = React.useState("")
@@ -17,10 +18,12 @@ export default function AddTodoForm({onAddTodo}) {
         setTodoTitle("") //updates state when form submitted
     }  
     return (
-        <form onSubmit={handleAddTodo} >
-            <InputWithLabel todoTitle= {todoTitle} handleTitleChange={handleTitleChange}>Todo Title</InputWithLabel>
-            <button type="submit">Add</button>
-        </form> 
+        <div className={styles.container}>
+            <form onSubmit={handleAddTodo} className={styles.form}>
+                <InputWithLabel todoTitle= {todoTitle} handleTitleChange={handleTitleChange}></InputWithLabel>
+                <button type="submit" className={styles.button}><BsPlusSquare className={styles.icon} size="1.2rem"/></button>
+            </form>
+        </div> 
     )
 }
 

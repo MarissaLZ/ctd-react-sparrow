@@ -1,0 +1,28 @@
+.sideBarContainer {
+    display: flex;
+    align-items: flex-start;
+    direction: column;
+    background: rgba(0, 0, 128, 0.839);
+    flex: 1;
+    color:azure;
+    /* animation: fadeInAnimation 2s; */
+    
+}
+
+/* @keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+} */
+
+
+.header {
+    margin: 3rem 0;
+    flex: 1;
+    text-align: center;
+}
+
+/* instead of conditanlly rendering a compoent maybe I can conditioanlly render*/

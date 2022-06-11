@@ -1,0 +1,14 @@
+.container {
+    height: 90%;
+    width: 30%;
+    /* flex-grow: 1; allows child to grow to full width of parent container */   
+}
+.input {
+    background: transparent;
+    border: none;
+    color: azure;
+    font: inherit;
+    height: 100%;
+    width: 100%;
+    outline: none;
+}
