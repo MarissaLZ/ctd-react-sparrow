@@ -1,4 +1,5 @@
 import React from "react"
+import styles from "./InputWithLabel.module.css"
 
 export default function InputWithLabel({todoTitle, handleTitleChange, children}) {
     //children allows us to pass text node in <InputWithLabel/> instance
@@ -11,7 +12,7 @@ export default function InputWithLabel({todoTitle, handleTitleChange, children})
     }, [])
     // auto focus only remains in place w/ Enter key and not when clicking button
     return(
-        <>
+        <div className={styles.container}>
             <label htmlFor="todoTitle">{children}</label>
             <input 
                 id="todoTitle"
@@ -20,7 +21,8 @@ export default function InputWithLabel({todoTitle, handleTitleChange, children})
                 value={todoTitle} 
                 ref={inputRef}
                 onChange={handleTitleChange}
+                className={styles.input}
             />
-        </>
+        </div>
     )
 }
