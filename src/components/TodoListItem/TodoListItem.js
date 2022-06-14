@@ -24,8 +24,8 @@ export default function TodoListItem ({todo, onRemoveTodo, onEditTodo}) {
         e.preventDefault()
         //pass id of todo item and a new object 
         setToggle((prevState) => !prevState)
-
         onEditTodo(todo.id, {fields: {title: todoTitle}})
+        setTodoTitle("")
     }
     return (
         <li className={styles.listItem}>

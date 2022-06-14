@@ -3,11 +3,15 @@ import {requestAddTodo, requestRemoveTodo, requestEditTodo} from "./todoAPI.js"
 import TodoList from '../TodoList/TodoList.js'
 import AddTodoForm from '../AddTodoForm/AddTodoForm.js'
 import styles from "./TodoListContainer.module.css"
-
+import Search from "../Search/Search.js"
 
 export default function TodoListContainer({handleToggle, sideBarToggled}) {
     const [todoList, setTodoList] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
+
+    const [searchTerm, setSearch] = React.useState("")
+
+    console.log("todoList", todoList)
 
     React.useEffect(() => {
         //Headers contain metadata about the request, such as content type, user agent
@@ -57,13 +61,13 @@ export default function TodoListContainer({handleToggle, sideBarToggled}) {
         //generate a new todoList to set the state with
         const newTodoList = todoList.map((todo) => {
             if (id === todo.id ) {
-            return { 
-                ...todo, //copy todo object info via spread
-                fields: { // replace the nested fields object
-                ...todo.fields, //with the same same one
-                title: response.fields.title // but change the title value inside of it
+                return { 
+                    ...todo, //copy todo object info via spread
+                    fields: { // replace the nested fields object
+                    ...todo.fields, //with the same same one
+                    title: response.fields.title // but change the title value inside of it
+                    }
                 }
-            }
             } else {
             return todo
             }
@@ -72,14 +76,28 @@ export default function TodoListContainer({handleToggle, sideBarToggled}) {
         })
     }
 
+    const handleSearch = (search) => {
+        setSearch(search)
+        
+    }
+
+    const searchedList = todoList.filter((item) => {
+        return(
+        //console.log("title", item.fields.title)
+            item.fields.title.includes( searchTerm)
+        )
+        //consol)e.log("searched List", searchedList)
+    })
+
     return (
     <div className={styles.todoListContainer}>
-        {!sideBarToggled && <button className={styles.button} onClick={handleToggle}>toggle</button> }
+        <button className={styles.button} onClick={handleToggle}>toggle</button> 
+        <Search handleSearch={handleSearch}></Search>
         <div className={styles.subcontainer}>
             <h1 className={styles.header}>Todo List</h1>
             <AddTodoForm onAddTodo={addTodo}/>
             {isLoading ? <p>Loading</p> :
-            <TodoList todoList={todoList} onRemoveTodo={removeTodo} onEditTodo={editTodo}/>}
+            <TodoList todoList={searchedList} onRemoveTodo={removeTodo} onEditTodo={editTodo}/>}
         </div>
     </div>
         

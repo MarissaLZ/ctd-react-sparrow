@@ -10,7 +10,6 @@ Routes-determines where in router systmen where you want to have routes
 */
 
 function App() {
-
   const [sideBarToggled, setSideBarToggle] = React.useState(true)
 
   const toggleSideBar = () => 
@@ -32,24 +31,3 @@ function App() {
   );
 }
 export default App;
-
-
-  // const removeTodo = (id) => {
-  //    fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default?` + new URLSearchParams({"records[]": id}) , {
-  //     method: "Delete",
-  //     headers: {
-  //       Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
-  //     },
-  //   })
-  //   .then(response => response.json())
-  //   .then((data) => {
-  //     const removeId = data.id
-  //     console.log("removalID", id)
-    
-  //   //locate item with given id and then remove from todoList state
-  //     const newTodoList = todoList.filter((item) => item.id!==removeId)
-  //     console.log(newTodoList)
-  //     setTodoList(newTodoList)
-  //   })
-  // }
-  //https://stackoverflow.com/questions/35038857/setting-query-string-using-fetch-get-request
