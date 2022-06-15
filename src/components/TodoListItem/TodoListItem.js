@@ -5,12 +5,12 @@ import styles from './TodoListItem.module.css'
 import EditInput from '../EditInput/EditInput'
 
 //can access anything for this todo object instance!
-export default function TodoListItem ({todo, onRemoveTodo, onEditTodo}) {
+export default function TodoListItem ({todo, onRemoveTodo, onEditTodo, editCheck}) {
 
     const [isToggled, setToggle] = React.useState(false)
     //inital value is the todo already added
     const [todoTitle, setTodoTitle] = React.useState(todo.fields.title)
-    const [isChecked, setIsChecked] = React.useState(false)
+    const [isChecked, setIsChecked] = React.useState(todo.fields.complete==="true")
     
     const handleRemove = (e) => {
         onRemoveTodo(todo.id)
@@ -30,6 +30,12 @@ export default function TodoListItem ({todo, onRemoveTodo, onEditTodo}) {
     }
     const handleCheck = () => {
         setIsChecked((c) => !c )
+        editCheck( todo.id, {
+            fields:
+             {
+                title: todoTitle,
+                 complete: isChecked.toString()
+                }})
     }
   
     return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import {requestAddTodo, requestRemoveTodo, requestEditTodo} from "./todoAPI.js"
+import {requestAddTodo, requestRemoveTodo, requestEditTodo, requestEditCheck} from "./todoAPI.js"
 import TodoList from '../TodoList/TodoList.js'
 import AddTodoForm from '../AddTodoForm/AddTodoForm.js'
 import styles from "./TodoListContainer.module.css"
@@ -73,6 +73,30 @@ export default function TodoListContainer({handleToggle}) {
         setTodoList(newTodoList) 
         })
     }
+        const editCheck = (id, checkItem) => {
+            console.log("check item",checkItem)
+        requestEditCheck(id, checkItem)
+        .then(response => {
+        //generate a new todoList to set the state with
+        const newTodoList = todoList.map((todo) => {
+            if (id === todo.id ) {
+                return { 
+                    ...todo, //copy todo object info via spread
+                    fields: { // replace the nested fields object
+                    ...todo.fields, //with the same same one
+                    complete: response.fields.complete // but change the title value inside of it
+                    }
+                }
+            } else {
+            return todo
+            }
+        })
+        setTodoList(newTodoList) 
+        })
+    }
+
+
+
     const handleSearch = (value) => {
         setSearchTerm(value)
     }
@@ -85,7 +109,7 @@ export default function TodoListContainer({handleToggle}) {
             <h1 className={styles.header}>Todo List</h1>
             <AddTodoForm onAddTodo={addTodo}/>
             {isLoading ? <p>Loading</p> :
-            <TodoList searchTerm={searchTerm} todoList={todoList} onRemoveTodo={removeTodo} onEditTodo={editTodo}/>}
+            <TodoList searchTerm={searchTerm} todoList={todoList} onRemoveTodo={removeTodo} onEditTodo={editTodo} editCheck={editCheck}/>}
         </div>
     </div>
         

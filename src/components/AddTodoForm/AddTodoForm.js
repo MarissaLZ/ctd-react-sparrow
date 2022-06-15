@@ -13,7 +13,7 @@ export default function AddTodoForm({onAddTodo}) {
     //triggers when form submitted
     const handleAddTodo = (event) => {
         event.preventDefault()
-        onAddTodo({ fields: {title: todoTitle} }) //passes object literal
+        onAddTodo({ fields: {title: todoTitle, complete: "false"} }) //passes object literal
         setTodoTitle("") //updates state when form submitted
     }  
     return (

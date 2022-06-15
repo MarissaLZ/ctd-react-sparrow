@@ -2,7 +2,7 @@ import React from 'react';
 import TodoListItem from "../TodoListItem/TodoListItem.js"
 import styles from "./TodoList.module.css"
 
-export default function TodoList({searchTerm, todoList, onRemoveTodo, onEditTodo}) {
+export default function TodoList({searchTerm, todoList, onRemoveTodo, onEditTodo, editCheck}) {
   
   //filter todoList
   const filterList = todoList.filter((item) => {
@@ -17,6 +17,7 @@ export default function TodoList({searchTerm, todoList, onRemoveTodo, onEditTodo
               todo={todo}
               onRemoveTodo={onRemoveTodo}
               onEditTodo={onEditTodo}
+              editCheck={editCheck}
             />);
           })}
         </ul>
