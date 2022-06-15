@@ -11,6 +11,9 @@
     width: 90%;
     cursor: pointer;
 }
+.checked {
+    text-decoration: line-through black;
+}
 
 .button {
     background: transparent;

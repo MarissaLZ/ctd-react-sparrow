@@ -8,8 +8,7 @@ export default function AddTodoForm({onAddTodo}) {
 
     //triggers every time something is typed into search bar
     const handleTitleChange = (event)=> {
-        const newTodoTitle = event.target.value
-        setTodoTitle(newTodoTitle) //updates state every time something typed
+        setTodoTitle(event.target.value) //updates state every time something typed
     }
     //triggers when form submitted
     const handleAddTodo = (event) => {
@@ -20,7 +19,7 @@ export default function AddTodoForm({onAddTodo}) {
     return (
         <div className={styles.container}>
             <form onSubmit={handleAddTodo} className={styles.form}>
-                <InputWithLabel todoTitle= {todoTitle} handleTitleChange={handleTitleChange}></InputWithLabel>
+                <InputWithLabel todoTitle={todoTitle} handleTitleChange={handleTitleChange}></InputWithLabel>
                 <button type="submit" className={styles.button}><BsPlusSquare className={styles.icon} size="1.2rem"/></button>
             </form>
         </div> 

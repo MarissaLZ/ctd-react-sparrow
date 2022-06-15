@@ -5,12 +5,11 @@ import AddTodoForm from '../AddTodoForm/AddTodoForm.js'
 import styles from "./TodoListContainer.module.css"
 import Search from "../Search/Search.js"
 
-export default function TodoListContainer({handleToggle, sideBarToggled}) {
+export default function TodoListContainer({handleToggle}) {
     const [todoList, setTodoList] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
-
-    const [searchTerm, setSearch] = React.useState("")
-
+    const [searchTerm, setSearchTerm ] = React.useState("")
+    console.log("search", searchTerm)
     console.log("todoList", todoList)
 
     React.useEffect(() => {
@@ -54,7 +53,6 @@ export default function TodoListContainer({handleToggle, sideBarToggled}) {
         setTodoList(newTodoList)
         })
     }
-
     const editTodo = (id, updatedTodo) => {
         requestEditTodo(id, updatedTodo)
         .then(response => {
@@ -75,19 +73,9 @@ export default function TodoListContainer({handleToggle, sideBarToggled}) {
         setTodoList(newTodoList) 
         })
     }
-
-    const handleSearch = (search) => {
-        setSearch(search)
-        
+    const handleSearch = (value) => {
+        setSearchTerm(value)
     }
-
-    const searchedList = todoList.filter((item) => {
-        return(
-        //console.log("title", item.fields.title)
-            item.fields.title.includes( searchTerm)
-        )
-        //consol)e.log("searched List", searchedList)
-    })
 
     return (
     <div className={styles.todoListContainer}>
@@ -97,7 +85,7 @@ export default function TodoListContainer({handleToggle, sideBarToggled}) {
             <h1 className={styles.header}>Todo List</h1>
             <AddTodoForm onAddTodo={addTodo}/>
             {isLoading ? <p>Loading</p> :
-            <TodoList todoList={searchedList} onRemoveTodo={removeTodo} onEditTodo={editTodo}/>}
+            <TodoList searchTerm={searchTerm} todoList={todoList} onRemoveTodo={removeTodo} onEditTodo={editTodo}/>}
         </div>
     </div>
         
