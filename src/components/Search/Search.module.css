@@ -1,8 +1,15 @@
+.input{
+    background: transparent;
+    font: inherit;
+    color: inherit;
+    border-radius: 0.2rem;
+    border-width: thin;
 
+}
  
  .icon { 
     position: absolute;
-        display: inline-block;
+    display: inline-block;
        
     
 }

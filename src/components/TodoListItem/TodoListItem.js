@@ -44,7 +44,7 @@ export default function TodoListItem ({todo, onRemoveTodo, onEditTodo, editCheck
     }
     const handleCheck = () => {
         setIsChecked((c) => !c )
-        editCheck( todo.id, 
+        editCheck(todo.id, 
             { fields:
              {
                 title: todoTitle,
@@ -55,7 +55,7 @@ export default function TodoListItem ({todo, onRemoveTodo, onEditTodo, editCheck
   
     return (
         <li className={styles.listItem}> 
-        <input id ="complete" type="checkbox" checked={isChecked} name="complete" onChange={handleCheck}/>
+        <input id ="complete" type="checkbox" checked={isChecked} name="complete" onChange={handleCheck} className={styles.checkbox}/>
         <label htmlFor="complete"></label>
             {isToggled ?
                 <EditInput value={todoTitle} onEditTodo={onEditTodo} handleTitleChange={handleTitleChange} handleEditedTodo={handleEditedTodo}/>
