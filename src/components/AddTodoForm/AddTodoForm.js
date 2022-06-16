@@ -3,18 +3,25 @@ import InputWithLabel from "../InputWithLabel/InputWithLabel";
 import styles from "./AddTodoForm.module.css"
 import { BsPlusSquare } from 'react-icons/bs'
 export default function AddTodoForm({onAddTodo}) {
-    //state hook
     const [todoTitle, setTodoTitle] = React.useState("")
 
     //triggers every time something is typed into search bar
     const handleTitleChange = (event)=> {
-        setTodoTitle(event.target.value) //updates state every time something typed
+         setTodoTitle(event.target.value)
     }
     //triggers when form submitted
     const handleAddTodo = (event) => {
         event.preventDefault()
-        onAddTodo({ fields: {title: todoTitle, complete: "false"} }) //passes object literal
-        setTodoTitle("") //updates state when form submitted
+        const userInput = todoTitle.trim()
+        if (userInput==="") {
+            console.log("user input spaces")
+            //put message in input?
+             //do nothing tell user this is invalid
+        }
+        else {
+            onAddTodo({ fields: {title: todoTitle, complete: "false"} }) //passes object literal
+            setTodoTitle("") //updates state when form submitted
+        }
     }  
     return (
         <div className={styles.container}>

@@ -30,11 +30,11 @@ export default function TodoListContainer({handleToggle}) {
     }, [])
 
     //useEffect hook to store todoList locally
-    React.useEffect( () => {
+    React.useEffect(() => {
         if (isLoading === false) {
         localStorage.setItem("savedTodoList", JSON.stringify(todoList))
         }
-    }, [todoList,isLoading ])
+    }, [todoList, isLoading ])
 
     //handlers
     const addTodo = (newTodo) => {
@@ -63,7 +63,8 @@ export default function TodoListContainer({handleToggle}) {
                     ...todo, //copy todo object info via spread
                     fields: { // replace the nested fields object
                     ...todo.fields, //with the same same one
-                    title: response.fields.title // but change the title value inside of it
+                    title: response.fields.title, // but change the title value inside of it
+                    complete: response.fields.complete
                     }
                 }
             } else {
@@ -95,8 +96,6 @@ export default function TodoListContainer({handleToggle}) {
         })
     }
 
-
-
     const handleSearch = (value) => {
         setSearchTerm(value)
     }
@@ -108,7 +107,7 @@ export default function TodoListContainer({handleToggle}) {
         <div className={styles.subcontainer}>
             <h1 className={styles.header}>Todo List</h1>
             <AddTodoForm onAddTodo={addTodo}/>
-            {isLoading ? <p>Loading</p> :
+            {isLoading ? <p>Loading</p> : 
             <TodoList searchTerm={searchTerm} todoList={todoList} onRemoveTodo={removeTodo} onEditTodo={editTodo} editCheck={editCheck}/>}
         </div>
     </div>

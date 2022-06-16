@@ -11,31 +11,46 @@ export default function TodoListItem ({todo, onRemoveTodo, onEditTodo, editCheck
     //inital value is the todo already added
     const [todoTitle, setTodoTitle] = React.useState(todo.fields.title)
     const [isChecked, setIsChecked] = React.useState(todo.fields.complete==="true")
-    
+    //booleean here and string in db
+
+    const handleTitleChange = (e) => {
+        setTodoTitle(e.target.value)
+    }
+
+    const handleEditedTodo = (e) => {
+        e.preventDefault()
+        const userInput = todoTitle.trim()
+        if ( userInput ==="") {
+            setToggle((t) => !t)
+            setTodoTitle(todo.fields.title)
+        } else {
+        //pass id of todo item and a new object 
+        setToggle((prevState) => !prevState)
+        onEditTodo(todo.id, 
+            { fields:
+                {
+                    title: todoTitle,
+                    complete: isChecked.toString()
+                }
+            })
+        }
+    }
+
     const handleRemove = (e) => {
         onRemoveTodo(todo.id)
     }
     const handleToggle = (e) => {
         setToggle((prevState) => !prevState)
     }
-    const handleTitleChange = (e) => {
-        setTodoTitle(e.target.value)
-    }
-    const handleEditedTodo = (e) => {
-        e.preventDefault()
-        //pass id of todo item and a new object 
-        setToggle((prevState) => !prevState)
-        onEditTodo(todo.id, {fields: {title: todoTitle}})
-        setTodoTitle("")
-    }
     const handleCheck = () => {
         setIsChecked((c) => !c )
-        editCheck( todo.id, {
-            fields:
+        editCheck( todo.id, 
+            { fields:
              {
                 title: todoTitle,
                  complete: isChecked.toString()
-                }})
+                }
+            })
     }
   
     return (
