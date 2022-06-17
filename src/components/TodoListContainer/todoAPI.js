@@ -33,7 +33,13 @@ export function requestEditTodo(id, updatedTodo) {
       },
       body: JSON.stringify(updatedTodo)
     })
-    .then(response => response.json())
+    .then((response) => {
+      if (response.status===200) {
+        return response.json()
+      } else {
+        throw new Error ("There is an issue")
+      }
+    })
 }
 
 export function requestEditCheck(id, checkItem) {
@@ -45,5 +51,12 @@ export function requestEditCheck(id, checkItem) {
       },
       body: JSON.stringify(checkItem)
     })
-    .then(response => response.json())
+    .then((response) => {
+      if (response.status===200) {
+        return response.json()
+      } else {
+        throw new Error ("There is an issue")
+      }
+    })   
 }
+

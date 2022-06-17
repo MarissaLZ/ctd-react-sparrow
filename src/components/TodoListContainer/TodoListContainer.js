@@ -5,7 +5,7 @@ import AddTodoForm from '../AddTodoForm/AddTodoForm.js'
 import styles from "./TodoListContainer.module.css"
 import Search from "../Search/Search.js"
 
-export default function TodoListContainer({handleToggle}) {
+export default function TodoListContainer() {
     const [todoList, setTodoList] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
     const [searchTerm, setSearchTerm ] = React.useState("")
@@ -53,7 +53,24 @@ export default function TodoListContainer({handleToggle}) {
         setTodoList(newTodoList)
         })
     }
-    const editTodo = (id, updatedTodo) => {
+
+    const editTodo = (id, previousTodo, updatedTodo, ) => {
+        //immediately update todoList locally instead of waiting for server
+        setTodoList (
+            todoList.map((todo) => {
+                if (id === todo.id ) {
+                    return { 
+                        ...todo, //copy todo object info via spread
+                        fields: { // replace the nested fields object
+                        ...updatedTodo.fields //with the same same one
+                        }
+                    }
+                } else {
+                return todo
+                }
+            })
+        )
+        //fetch request
         requestEditTodo(id, updatedTodo)
         .then(response => {
         //generate a new todoList to set the state with
@@ -73,9 +90,25 @@ export default function TodoListContainer({handleToggle}) {
         })
         setTodoList(newTodoList) 
         })
+        .catch((error) => {
+            console.log(error)
+            //revert todoList back to previous todo if error
+            setTodoList (
+                todoList.map((todo) => {
+                    if (id === todo.id ) {
+                        return { 
+                            ...todo, //copy todo object info via spread
+                            fields: { // replace the nested fields object
+                            ...previousTodo.fields //with the same same one
+                        }
+                    }
+                } else {
+                return todo
+                }
+            }))
+        })
     }
-        const editCheck = (id, checkItem) => {
-            console.log("check item",checkItem)
+    const editCheck = (id, checkItem) => {
         requestEditCheck(id, checkItem)
         .then(response => {
         //generate a new todoList to set the state with
@@ -94,7 +127,12 @@ export default function TodoListContainer({handleToggle}) {
         })
         setTodoList(newTodoList) 
         })
+        .catch((error) => {
+            console.log(error)
+        })
     }
+
+
 
     const handleSearch = (value) => {
         setSearchTerm(value)
@@ -102,7 +140,6 @@ export default function TodoListContainer({handleToggle}) {
 
     return (
     <div className={styles.todoListContainer}>
-        <button className={styles.button} onClick={handleToggle}>toggle</button> 
         <Search handleSearch={handleSearch}></Search>
         <div className={styles.subcontainer}>
             <h1 className={styles.header}>Tasks</h1>

@@ -10,18 +10,14 @@ Routes-determines where in router systmen where you want to have routes
 */
 
 function App() {
-  const [sideBarToggled, setSideBarToggle] = React.useState(true)
-
-  const toggleSideBar = () => 
-  setSideBarToggle((preState) => !preState)
+  
   
   return (
     <Router>
       <Routes>
         <Route path="/" element={
           <div className={styles.container}>
-            {sideBarToggled && <SideBar handleToggle={toggleSideBar}/>}
-            <TodoListContainer handleToggle={toggleSideBar} sideBarToggled={sideBarToggled}/> 
+            <TodoListContainer/> 
           </div>
         }
         />

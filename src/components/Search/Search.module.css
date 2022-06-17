@@ -1,15 +1,23 @@
-.input{
+.form {
+    display: flex;
+    position: relative;
+}
+.input {
     background: transparent;
     font: inherit;
     color: inherit;
     border-radius: 0.2rem;
     border-width: thin;
-
-}
- 
- .icon { 
-    position: absolute;
-    display: inline-block;
-       
     
+}
+.button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.icon{
+    position: absolute;
+    left: 9rem;
 }

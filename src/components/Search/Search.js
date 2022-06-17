@@ -1,5 +1,4 @@
 import React from "react"
-import { IoIosSearch} from "react-icons/io";
 import { TiDelete } from "react-icons/ti";
 import styles from "./Search.module.css"
 
@@ -21,12 +20,11 @@ export default function Search ({handleSearch}) {
 
     return (
         <>
-            <form>
+            <form className={styles.form} >
                 <label htmlFor="searchList">
-                <input id="searchList" type="text" placeholder="search" value={value} onChange={handleChange} className={styles.input}/> 
+                    <input id="searchList" type="text" placeholder="search" value={value} onChange={handleChange} className={styles.input}/> 
                 </label>
-            <button type="button"><TiDelete className={styles.iconClear} onClick={handleClick}/></button> 
-            {/* <button type="button"><IoIosSearch className={styles.iconSearch}/></button> */}
+                 <button type="button" onClick={handleClick} className={styles.button}><TiDelete className={styles.icon} size="1.2rem"/></button> 
             </form>
         </>
     )

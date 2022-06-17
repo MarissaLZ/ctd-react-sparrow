@@ -23,16 +23,24 @@ export default function TodoListItem ({todo, onRemoveTodo, onEditTodo, editCheck
         if ( userInput ==="") {
             setToggle((t) => !t)
             setTodoTitle(todo.fields.title)
-        } else {
-        //pass id of todo item and a new object 
-        setToggle((prevState) => !prevState)
-        onEditTodo(todo.id, 
-            { fields:
-                {
-                    title: todoTitle,
-                    complete: isChecked.toString()
+        } 
+        else {
+            const previousTodo =  { 
+                fields: {
+                    title: todo.fields.title,
+                    complete: todo.fields.complete 
+                    }
                 }
-            })
+
+            setToggle((prevState) => !prevState)
+            
+            onEditTodo(todo.id, previousTodo, 
+                { fields:
+                    {
+                        title: todoTitle,
+                        complete: isChecked.toString()
+                    }
+                })
         }
     }
 
