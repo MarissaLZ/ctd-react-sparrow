@@ -1,6 +1,5 @@
 import React from 'react';
 import TodoListContainer from './components/TodoListContainer/TodoListContainer.js'
-import SideBar from './components/SideBar/SideBar.js'
 import {BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import styles from "./App.module.css"
 /*

@@ -132,17 +132,15 @@ export default function TodoListContainer() {
         })
     }
 
-
-
     const handleSearch = (value) => {
         setSearchTerm(value)
     }
 
     return (
     <div className={styles.todoListContainer}>
-        <Search handleSearch={handleSearch}></Search>
         <div className={styles.subcontainer}>
             <h1 className={styles.header}>Tasks</h1>
+            <Search handleSearch={handleSearch}></Search>
             <AddTodoForm onAddTodo={addTodo}/>
             {isLoading ? <p>Loading</p> : 
             <TodoList searchTerm={searchTerm} todoList={todoList} onRemoveTodo={removeTodo} onEditTodo={editTodo} editCheck={editCheck}/>}
