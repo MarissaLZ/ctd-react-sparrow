@@ -1,6 +1,6 @@
 .container {
     height: 90%;
-    width: 30%;
+    width: 70%;
     /* flex-grow: 1; allows child to grow to full width of parent container */   
 }
 .input {

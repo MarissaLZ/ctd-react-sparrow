@@ -2,7 +2,9 @@ import React from "react";
 import InputWithLabel from "../InputWithLabel/InputWithLabel";
 import styles from "./AddTodoForm.module.css"
 import { BsPlusSquare } from 'react-icons/bs'
-export default function AddTodoForm({onAddTodo}) {
+import PropTypes from "prop-types";
+
+export default function AddTodoForm({ tableID, onAddTodo}) {
     const [todoTitle, setTodoTitle] = React.useState("")
 
     //triggers every time something is typed into search bar
@@ -10,16 +12,14 @@ export default function AddTodoForm({onAddTodo}) {
          setTodoTitle(event.target.value)
     }
     //triggers when form submitted
-    const handleAddTodo = (event) => {
-        event.preventDefault()
+    const handleAddTodo = (e) => {
+        e.preventDefault()
         const userInput = todoTitle.trim()
         if (userInput==="") {
             console.log("user input spaces")
-            //put message in input?
-             //do nothing tell user this is invalid
         }
         else {
-            onAddTodo({ fields: {title: todoTitle, complete: "false"} }) //passes object literal
+            onAddTodo(tableID, { fields: {title: todoTitle, complete: "false"} }) //passes object literal
             setTodoTitle("") //updates state when form submitted
         }
     }  
@@ -31,5 +31,11 @@ export default function AddTodoForm({onAddTodo}) {
             </form>
         </div> 
     )
+
+}
+
+AddTodoForm.propTypes = {
+        onAddTodo: PropTypes.func,
+        tableId: PropTypes.string
 }
 

@@ -19,10 +19,13 @@ body {
     color: #FFFFFF;
     
 }
-
-
+.mainContainer {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+}
 .container {
     display: flex;
-    flex-direction: row;
-    height: 100vh;
+    flex-direction: column;
+    align-items: center;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import TodoListItem from "../TodoListItem/TodoListItem.js"
 import styles from "./TodoList.module.css"
 
-export default function TodoList({searchTerm, todoList, onRemoveTodo, onEditTodo, editCheck}) {
+export default function TodoList({tableID, searchTerm, todoList, onRemoveTodo, onEditTodo, editCheck}) {
   
   //filter todoList
   const filterList = todoList.filter((item) => {
@@ -18,12 +18,12 @@ export default function TodoList({searchTerm, todoList, onRemoveTodo, onEditTodo
               onRemoveTodo={onRemoveTodo}
               onEditTodo={onEditTodo}
               editCheck={editCheck}
+              tableID={tableID}
             />);
           })}
         </ul>
     );
 }
-    
       //   searchTerm==="" ? todoList :
       // todoList.filter((item) => {
       //   return (item.fields.title.toLowerCase().includes(searchTerm.toLowerCase()))

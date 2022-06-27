@@ -5,8 +5,7 @@ import styles from './TodoListItem.module.css'
 import EditInput from '../EditInput/EditInput'
 
 //can access anything for this todo object instance!
-export default function TodoListItem ({todo, onRemoveTodo, onEditTodo, editCheck}) {
-
+export default function TodoListItem ({ tableID, todo, onRemoveTodo, onEditTodo, editCheck}) {
     const [isToggled, setToggle] = React.useState(false)
     //inital value is the todo already added
     const [todoTitle, setTodoTitle] = React.useState(todo.fields.title)
@@ -20,7 +19,7 @@ export default function TodoListItem ({todo, onRemoveTodo, onEditTodo, editCheck
     const handleEditedTodo = (e) => {
         e.preventDefault()
         const userInput = todoTitle.trim()
-        if ( userInput ==="") {
+        if (userInput ==="") {
             setToggle((t) => !t)
             setTodoTitle(todo.fields.title)
         } 
@@ -31,10 +30,8 @@ export default function TodoListItem ({todo, onRemoveTodo, onEditTodo, editCheck
                     complete: todo.fields.complete 
                     }
                 }
-
-            setToggle((prevState) => !prevState)
-            
-            onEditTodo(todo.id, previousTodo, 
+            setToggle((t) => !t)
+            onEditTodo(tableID, todo.id, previousTodo, 
                 { fields:
                     {
                         title: todoTitle,
@@ -45,22 +42,25 @@ export default function TodoListItem ({todo, onRemoveTodo, onEditTodo, editCheck
     }
 
     const handleRemove = (e) => {
-        onRemoveTodo(todo.id)
+        onRemoveTodo(tableID, todo.id)
     }
     const handleToggle = (e) => {
         setToggle((prevState) => !prevState)
     }
     const handleCheck = () => {
         setIsChecked((c) => !c )
-        editCheck(todo.id, 
+    }
+    React.useEffect(() => {
+         editCheck(tableID, todo.id, 
             { fields:
              {
                 title: todoTitle,
                  complete: isChecked.toString()
                 }
             })
-    }
-  
+        }, [isChecked, todoTitle, todo.id, tableID] )
+
+
     return (
         <li className={styles.listItem}> 
         <input id ="complete" type="checkbox" checked={isChecked} name="complete" onChange={handleCheck} className={styles.checkbox}/>

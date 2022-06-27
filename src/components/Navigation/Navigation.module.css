@@ -1,0 +1,26 @@
+.nav {
+    background: #303030;
+    border-right: 0.75px solid #151515;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+}
+.item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    padding: 0.3rem 0.3rem;
+}
+.icon {
+    display: inline;
+    stroke: #FFFFFF;
+    margin-right: 0.5rem;
+}
+.item:hover {
+    background-color: #3D3D3D;
+    border-radius: 0.2rem;
+}

@@ -3,7 +3,6 @@ import { TiDelete } from "react-icons/ti";
 import { BiSearch } from "react-icons/bi"
 import styles from "./Search.module.css"
 
-
 export default function Search ({handleSearch}) {
     const [value, setValue] = React.useState("")
 
@@ -14,14 +13,17 @@ export default function Search ({handleSearch}) {
     const handleClick = (e) => {
         setValue("")
     }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+    }
 
     React.useEffect(() => {
         handleSearch(value)
-    }, [value,handleSearch])
+    }, [value, handleSearch])
 
     return (
         <>
-            <form className={styles.form} >
+            <form onSubmit={handleSubmit} className={styles.form} >
                 <button type="button" className={styles.button}><BiSearch className={styles.iconSearch} size="1.2rem"/></button> 
                 <label htmlFor="searchList">
                     <input id="searchList" type="text" placeholder="Search" value={value} onChange={handleChange} className={styles.input}/> 

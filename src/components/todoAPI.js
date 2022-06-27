@@ -1,6 +1,18 @@
+export function requestAddAccount(account) {
+  return fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/tbl304DDbP24rw3sE`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify( {fields: account}
+    )
+  })
+    .then(response => response.json())
+}
 
-export function requestAddTodo(newTodo) {
-    return fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`, {
+export function requestAddTodo(tableID, newTodo) {
+  return fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableID}`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
@@ -13,8 +25,8 @@ export function requestAddTodo(newTodo) {
     .then(response => response.json())
 }
 
-export function requestRemoveTodo(id) {
-  return fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default/${id}`, {
+export function requestRemoveTodo(tableID, id) {
+  return fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableID}/${id}`, {
       method: "Delete",
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
@@ -24,8 +36,8 @@ export function requestRemoveTodo(id) {
     .then(response => response.json())
 }
 
-export function requestEditTodo(id, updatedTodo) {
-  return fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default/${id}`, {
+export function requestEditTodo(tableID, id, updatedTodo) {
+  return fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableID}/${id}`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
@@ -41,9 +53,8 @@ export function requestEditTodo(id, updatedTodo) {
       }
     })
 }
-
-export function requestEditCheck(id, checkItem) {
-  return fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default/${id}`, {
+export function requestEditCheck(tableID, id, checkItem) {
+  return fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableID}/${id}`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,

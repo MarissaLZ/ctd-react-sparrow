@@ -10,8 +10,7 @@
     border-radius: 0.2rem;
     border: 1px solid #3D3D3D;
     padding: 0.3rem 2rem;
-    width: 11rem;
-    
+    width: 11rem;  
 }
 .button {
     background: transparent;
@@ -31,5 +30,4 @@
     left: 0.5rem;
     fill: #ffffff;
     stroke: #ffffff;
-   
 }
