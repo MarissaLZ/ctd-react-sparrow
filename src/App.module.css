@@ -14,11 +14,18 @@
 body {
     font-family: 'Quicksand', 'Poppins', Georgia, 'Times New Roman', serif;
     font-size: 16px;
-    background: #e2d9d4;
+    background: #212121;
     height: 100vh;
+    color: #FFFFFF;
+    
+}
+.mainContainer {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 6fr;
 }
 .container {
     display: flex;
-    flex-direction: row;
-    height: 100vh;
+    flex-direction: column;
+    align-items: center;
 }

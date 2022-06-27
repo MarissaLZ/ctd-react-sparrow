@@ -1,15 +1,23 @@
+
 .listItem {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background:rgb(57, 53, 53) ;
-    border-radius: 0.2rem;
-    padding: 0.5rem 1rem 0.5rem 1rem;
-    height: 3rem ;
+    border-bottom: 1px solid #484848;
+    padding: 0.5rem 0.5rem;
+    height: 3rem;
+}
+
+.checkbox {
+    margin-right: 0.5rem;
 }
 .listItemText {
     width: 90%;
     cursor: pointer;
+}
+.checked {
+    text-decoration: line-through rgb(196, 26, 247);
+    text-decoration-thickness: 2px;
 }
 
 .button {

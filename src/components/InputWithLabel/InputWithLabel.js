@@ -22,6 +22,7 @@ export default function InputWithLabel({todoTitle, handleTitleChange, children})
                 ref={inputRef}
                 onChange={handleTitleChange}
                 className={styles.input}
+                placeholder="Add a Task"
             />
         </div>
     )

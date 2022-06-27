@@ -1,0 +1,13 @@
+.MainContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 5rem 10rem; 
+    flex-grow: 1;
+}
+
+.header {
+    margin-bottom: 3rem;
+}
+.form {
+    margin-bottom: 2rem;
+}

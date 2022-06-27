@@ -1,18 +1,10 @@
 import React from "react"
-import {CSSTransition} from 'react-transition-group';
 import styles from "./SideBar.module.css"
 
-export default function SideBar({handleToggle}) {
-
-
-
-
-    
+export default function SideBar() {
     return (
-        
         <div className={styles.sideBarContainer}>
-            <h1 className={styles.header}>List A</h1>
-            <button type="button" onClick={handleToggle}> button</button>
+            <h1 className={styles.header}>Completed</h1>
         </div>
     );
 }

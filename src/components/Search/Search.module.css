@@ -1,0 +1,33 @@
+.form {
+    display: flex;
+    position: relative;
+    margin-bottom: 3rem;
+}
+.input {
+    background: #3D3D3D;
+    font: inherit;
+    color: inherit;
+    border-radius: 0.2rem;
+    border: 1px solid #3D3D3D;
+    padding: 0.3rem 2rem;
+    width: 11rem;  
+}
+.button {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+}
+.iconDelete {
+    position: absolute;
+    left: 9.5rem;
+    fill: #ffffff;
+    stroke: #ffffff;
+    cursor: pointer;
+}
+.iconSearch {
+    position: absolute;
+    left: 0.5rem;
+    fill: #ffffff;
+    stroke: #ffffff;
+}
