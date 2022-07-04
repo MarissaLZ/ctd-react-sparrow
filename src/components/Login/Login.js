@@ -33,12 +33,10 @@ export default function Login ({handleUser}) {
             }
         )
     }
-
-        
+    
      if (authenticate) {
         return <Navigate to="/home"/>
     }
-
     return(
         <div className={styles.loginSubcontainer}>
             <h1>Login</h1>
@@ -49,7 +47,5 @@ export default function Login ({handleUser}) {
             </form>
             <span>Don't have an account? <Link to="/signup" className={styles.link}>Sign up</Link></span>
         </div>
-     
     )
-
 }
