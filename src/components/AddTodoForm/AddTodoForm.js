@@ -4,7 +4,7 @@ import styles from "./AddTodoForm.module.css"
 import { BsPlusSquare } from 'react-icons/bs'
 import PropTypes from "prop-types";
 
-export default function AddTodoForm({ tableID, onAddTodo}) {
+export function AddTodoForm({ tableID, onAddTodo}) {
     const [todoTitle, setTodoTitle] = React.useState("")
 
     //triggers every time something is typed into search bar

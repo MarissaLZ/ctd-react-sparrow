@@ -1,6 +1,6 @@
 import React from 'react';
-import TodoList from '../TodoList/TodoList.js'
-import AddTodoForm from '../AddTodoForm/AddTodoForm.js'
+import {TodoList} from '../TodoList/TodoList.js'
+import {AddTodoForm} from '../AddTodoForm/AddTodoForm.js'
 import styles from "./MainContainer.module.css"
 import Search from "../Search/Search.js"
 
