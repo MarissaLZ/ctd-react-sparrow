@@ -7,14 +7,14 @@ export function requestAddAccount(account) {
         Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ fields: account }),
+      body: JSON.stringify(account),
     }
   ).then((response) => response.json())
 }
 
-export function requestAddTodo(tableID, newTodo) {
+export function requestAddTodo(tableName, newTodo) {
   return fetch(
-    `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableID}`,
+    `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableName}`,
     {
       method: "POST",
       headers: {
@@ -28,9 +28,9 @@ export function requestAddTodo(tableID, newTodo) {
   ).then((response) => response.json())
 }
 
-export function requestRemoveTodo(tableID, id) {
+export function requestRemoveTodo(tableName, id) {
   return fetch(
-    `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableID}/${id}`,
+    `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableName}/${id}`,
     {
       method: "Delete",
       headers: {
@@ -41,9 +41,9 @@ export function requestRemoveTodo(tableID, id) {
   ).then((response) => response.json())
 }
 
-export function requestEditTodo(tableID, id, updatedTodo) {
+export function requestEditTodo(tableName, id, updatedTodo) {
   return fetch(
-    `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableID}/${id}`,
+    `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableName}/${id}`,
     {
       method: "PATCH",
       headers: {
@@ -60,9 +60,9 @@ export function requestEditTodo(tableID, id, updatedTodo) {
     }
   })
 }
-export function requestEditCheck(tableID, id, checkItem) {
+export function requestEditCheck(tableName, id, checkItem) {
   return fetch(
-    `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableID}/${id}`,
+    `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableName}/${id}`,
     {
       method: "PATCH",
       headers: {

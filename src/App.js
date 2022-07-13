@@ -28,16 +28,14 @@ Routes-determines where in router systmen where you want to have routes
 function App() {
   const [todoList, setTodoList] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
-  const [tableID, setTableID] = React.useState("tblKkypMUe5OhJExQ")
+  const [tableName, setTableName] = React.useState("Today")
   const [user, setUser] = React.useState({})
+  console.log("user", user)
   console.log("todoList", todoList)
 
   React.useEffect(() => {
-    //Headers contain metadata about the request, such as content type, user agent
-    //to return the same ordered list in airtable must include view parameter "Grid view". See Airtable API Encoder
-    //specifies number of records and view parameters
     fetch(
-      `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableID}?maxRecords=30&view=Grid+view`,
+      `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableName}?maxRecords=30&view=Grid+view`,
       {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
@@ -46,33 +44,27 @@ function App() {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log("GET response", data.records)
-        setTodoList(data.records)
+        const sortedList = [...data.records].sort((a, b) =>
+          a.fields.title > b.fields.title ? 1 : -1
+        )
+        setTodoList(sortedList)
         setIsLoading(false)
       })
       .catch((error) => console.log("error", error))
   }, [])
 
-  //useEffect hook to store todoList locally
-  React.useEffect(() => {
-    if (isLoading === false) {
-      localStorage.setItem("savedTodoList", JSON.stringify(todoList))
-    }
-  }, [todoList, isLoading])
-
   //handlers
-  // const changeListID = (newTableID) => {
-  //   setTableID(newTableID)
+  // const changeListID = (newTableName) => {
+  //   setTableName(newTableName)
   // }
-  console.log(tableID)
 
   const handleUser = (userData) => {
     setUser(userData)
   }
 
-  const requestNewList = (newTableID) => {
+  const requestNewList = (newTableName) => {
     fetch(
-      `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${newTableID}?maxRecords=30&view=Grid+view`,
+      `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${newTableName}?maxRecords=30&view=Grid+view`,
       {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
@@ -81,22 +73,24 @@ function App() {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log("GET response", data.records)
-        setTodoList(data.records)
+        const sortedList = [...data.records].sort((a, b) =>
+          a.fields.title > b.fields.title ? 1 : -1
+        )
+        setTodoList(sortedList)
         setIsLoading(false)
-        setTableID(newTableID)
+        setTableName(newTableName)
       })
       .catch((error) => console.log("error", error))
   }
 
-  const addTodo = (tableID, newTodo) => {
-    requestAddTodo(tableID, newTodo).then((data) => {
+  const addTodo = (tableName, newTodo) => {
+    requestAddTodo(tableName, newTodo).then((data) => {
       setTodoList([...todoList, ...data.records])
       //add error handling
     })
   }
-  const removeTodo = (tableID, id) => {
-    requestRemoveTodo(tableID, id).then((data) => {
+  const removeTodo = (tableName, id) => {
+    requestRemoveTodo(tableName, id).then((data) => {
       const removeId = data.id
       //locate item with given id and then remove from todoList state
       const newTodoList = todoList.filter((item) => item.id !== removeId)
@@ -104,7 +98,7 @@ function App() {
     })
   }
 
-  const editTodo = (tableID, id, previousTodo, updatedTodo) => {
+  const editTodo = (tableName, id, previousTodo, updatedTodo) => {
     //immediately update todoList locally instead of waiting for server
     setTodoList(
       todoList.map((todo) => {
@@ -122,25 +116,8 @@ function App() {
       })
     )
     //fetch request
-    requestEditTodo(tableID, id, updatedTodo)
-      .then((response) => {
-        //generate a new todoList to set the state with
-        // const newTodoList = todoList.map((todo) => {
-        //   if (id === todo.id ) {
-        //     return {
-        //       ...todo, //copy todo object info via spread
-        //       fields: { // replace the nested fields object
-        //         ...todo.fields, //with the same same one
-        //         title: response.fields.title, // but change the title value inside of it
-        //         complete: response.fields.complete
-        //       }
-        //     }
-        //   } else {
-        //     return todo
-        //   }
-        // })
-        // setTodoList(newTodoList)
-      })
+    requestEditTodo(tableName, id, updatedTodo)
+      .then((response) => {})
       .catch((error) => {
         console.log(error)
         //revert todoList back to previous todo if error
@@ -162,8 +139,8 @@ function App() {
       })
   }
 
-  const editCheck = (tableID, id, checkItem) => {
-    requestEditCheck(tableID, id, checkItem)
+  const editCheck = (tableName, id, checkItem) => {
+    requestEditCheck(tableName, id, checkItem)
       .then((response) => {
         //generate a new todoList to set the state with
         const newTodoList = todoList.map((todo) => {
@@ -173,7 +150,7 @@ function App() {
               fields: {
                 // replace the nested fields object
                 ...todo.fields, //with the same same one
-                complete: response.fields.complete, // but change the title value inside of it
+                complete: response.fields.complete, // but change the value inside of it
               },
             }
           } else {
@@ -185,6 +162,21 @@ function App() {
       .catch((error) => {
         console.log(error)
       })
+  }
+
+  const handleSort = (direction) => {
+    //sort
+    if (direction) {
+      const sortedList = [...todoList].sort((a, b) =>
+        a.fields.title > b.fields.title ? -1 : 1
+      )
+      setTodoList(sortedList)
+    } else {
+      const sortedList = [...todoList].sort((a, b) =>
+        a.fields.title > b.fields.title ? 1 : -1
+      )
+      setTodoList(sortedList)
+    }
   }
 
   return (
@@ -212,13 +204,14 @@ function App() {
             <div className={styles.mainContainer}>
               <Navigation requestNewList={requestNewList} />
               <MainContainer
-                tableID={tableID}
+                tableName={tableName}
                 isLoading={isLoading}
                 todoList={todoList}
                 onAddTodo={addTodo}
                 onRemoveTodo={removeTodo}
                 onEditTodo={editTodo}
                 editCheck={editCheck}
+                handleSort={handleSort}
               />
             </div>
           }
@@ -228,6 +221,18 @@ function App() {
   )
 }
 export default App
+
+App.propTypes = {
+  tableName: PropTypes.string,
+  todoList: PropTypes.array,
+  onRemoveTodo: PropTypes.func,
+  onEditTodo: PropTypes.func,
+  editCheck: PropTypes.func,
+}
+
+//there is a glitch/infinite loop if user clicks checkboxes very very fast.
+//If delete is clicked very fast patch request fails AKA not found
+//switch too fast between lists causes errors
 
 // <Router>
 //     <Navigation/>

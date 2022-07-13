@@ -11,3 +11,21 @@
 .form {
     margin-bottom: 2rem;
 }
+
+.button {
+    background: transparent;
+    border: solid #ffffff 1px;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    align-content: flex-end;
+    display: flex;
+    margin-bottom: 1rem;
+    padding: 0.1rem 0.15rem;
+}
+
+
+.icon {
+    /* height: 1.2rem;
+    width: auto; */
+    stroke: #ffffff;
+}
