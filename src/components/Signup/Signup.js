@@ -6,33 +6,54 @@ import Input from "../Input.js"
 
 export default function Signup() {
   const [account, setAccount] = React.useState({
-    firstName: "",
-    email: "",
-    password: "",
+    fields: {
+      firstName: "",
+      email: "",
+      password: "",
+    },
   })
+
+  const [success, setSuccess] = React.useState(false)
+
+  console.log("account", account)
 
   const handleSubmit = (e) => {
     e.preventDefault()
     requestAddAccount(account).then((data) => {
-      setAccount(data)
+      console.log("data", data)
+      setAccount({
+        fields: {
+          firstName: "",
+          email: "",
+          password: "",
+        },
+      })
+      setSuccess(true)
     })
   }
   const handleChange = (e) => {
-    setAccount({
+    return setAccount({
       ...account,
-      [e.target.id]: e.target.value, //dynamically access id of input and set it's value
-      //here were are replacing the given key: value pair . We are NOT mutating
-      //we don't map since this is not an array
+      fields: {
+        ...account.fields,
+        [e.target.id]: e.target.value,
+      },
     })
-  }
+  } //dynamically access id of input and set it's value
+  //here were are replacing the given key: value pair. We are NOT mutating
+  //we don't map since this is not an array
+
   return (
     <div className={styles.signupSubcontainer}>
       <h1>Sign Up</h1>
+      {success && (
+        <p className={styles.success}> Account Created. Please go to Login</p>
+      )}
       <form onSubmit={handleSubmit} className={styles.formContainer}>
         <Input
           id="firstName"
           type="text"
-          value={account.username}
+          value={account.fields.firstName}
           handleChange={handleChange}
           className={styles.input}
           placeholder="First Name"
@@ -40,7 +61,7 @@ export default function Signup() {
         <Input
           id="email"
           type="email"
-          value={account.email}
+          value={account.fields.email}
           handleChange={handleChange}
           className={styles.input}
           placeholder="Email"
@@ -48,7 +69,7 @@ export default function Signup() {
         <Input
           id="password"
           type="text"
-          value={account.password}
+          value={account.fields.password}
           handleChange={handleChange}
           className={styles.input}
           placeholder="Password"

@@ -4,40 +4,36 @@ import styles from "./TodoList.module.css"
 import PropTypes from "prop-types"
 
 export function TodoList({
-  tableID,
-  searchTerm,
+  tableName,
   todoList,
   onRemoveTodo,
   onEditTodo,
   editCheck,
+  title,
 }) {
-  //filter todoList
-  const filterList = todoList.filter((item) => {
-    return item.fields.title.toLowerCase().includes(searchTerm.toLowerCase())
-  })
-  console.log("filteredList", filterList)
-
   return (
-    <ul className={styles.list}>
-      {filterList.map((todo) => {
-        return (
-          <TodoListItem
-            key={todo.id}
-            todo={todo}
-            onRemoveTodo={onRemoveTodo}
-            onEditTodo={onEditTodo}
-            editCheck={editCheck}
-            tableID={tableID}
-          />
-        )
-      })}
-    </ul>
+    <>
+      <h3 className={styles.title}>{title}</h3>
+      <ul className={styles.list}>
+        {todoList.map((todo) => {
+          return (
+            <TodoListItem
+              key={todo.id}
+              todo={todo}
+              onRemoveTodo={onRemoveTodo}
+              onEditTodo={onEditTodo}
+              editCheck={editCheck}
+              tableName={tableName}
+            />
+          )
+        })}
+      </ul>
+    </>
   )
 }
 
 TodoList.propTypes = {
-  tableID: PropTypes.string,
-  searchTerm: PropTypes.string,
+  tableName: PropTypes.string,
   todoList: PropTypes.array,
   onRemoveTodo: PropTypes.func,
   onEditTodo: PropTypes.func,

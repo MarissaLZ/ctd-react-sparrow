@@ -7,7 +7,7 @@ import PropTypes from "prop-types"
 
 //can access anything for this todo object instance!
 export default function TodoListItem({
-  tableID,
+  tableName,
   todo,
   onRemoveTodo,
   onEditTodo,
@@ -39,7 +39,7 @@ export default function TodoListItem({
         },
       }
       setToggle((t) => !t)
-      onEditTodo(tableID, todo.id, previousTodo, {
+      onEditTodo(tableName, todo.id, previousTodo, {
         fields: {
           title: todoTitle,
           complete: isChecked.toString(),
@@ -49,7 +49,7 @@ export default function TodoListItem({
   }
 
   const handleRemove = (e) => {
-    onRemoveTodo(tableID, todo.id)
+    onRemoveTodo(tableName, todo.id)
   }
   const handleToggle = (e) => {
     setToggle((prevState) => !prevState)
@@ -58,13 +58,13 @@ export default function TodoListItem({
     setIsChecked((c) => !c)
   }
   React.useEffect(() => {
-    editCheck(tableID, todo.id, {
+    editCheck(tableName, todo.id, {
       fields: {
         title: todoTitle,
         complete: isChecked.toString(),
       },
     })
-  }, [isChecked, todoTitle, todo.id, tableID])
+  }, [isChecked, todoTitle, todo.id, tableName])
 
   return (
     <li className={styles.listItem}>
@@ -103,7 +103,7 @@ export default function TodoListItem({
   )
 }
 TodoListItem.propTypes = {
-  tableID: PropTypes.string,
+  tableName: PropTypes.string,
   todo: PropTypes.object,
   onRemoveTodo: PropTypes.func,
   onEditTodo: PropTypes.func,
