@@ -1,4 +1,3 @@
-
 .listItem {
     display: flex;
     justify-content: space-between;
@@ -7,26 +6,28 @@
     padding: 0.5rem 0.5rem;
     height: 3rem;
 }
-
 .checkbox {
     margin-right: 0.5rem;
 }
 .listItemText {
     width: 90%;
     cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /*looks at wrapping as an option */
 }
 .checked {
     text-decoration: line-through rgb(196, 26, 247);
     text-decoration-thickness: 2px;
 }
-
 .button {
     background: transparent;
     border: none;
     cursor: pointer;
     align-content: flex-end;
+    margin-left: 0.5rem;
 }
-
 .icon {
     display: block;
     margin: 0 auto;

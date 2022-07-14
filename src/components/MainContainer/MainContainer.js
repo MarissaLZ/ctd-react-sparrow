@@ -15,6 +15,7 @@ export default function MainContainer({
   onEditTodo,
   editCheck,
   handleSort,
+  openNav,
 }) {
   const [searchTerm, setSearchTerm] = React.useState("")
   const [isSorted, setIsSorted] = React.useState(false)
@@ -26,7 +27,7 @@ export default function MainContainer({
   // }, [isSorted])
 
   const handleClick = () => {
-    setIsSorted((s) => !s) //currently false but we want to be true. Will be true on next render.
+    setIsSorted((s) => !s)
     handleSort(!isSorted)
   }
 
@@ -40,7 +41,6 @@ export default function MainContainer({
       item.fields.title.toLowerCase().includes(searchTerm.toLowerCase())
     )
   })
-  console.log("completed", completeList)
 
   const incompleteList = todoList.filter((item) => {
     return (
@@ -49,10 +49,14 @@ export default function MainContainer({
     )
   })
 
-  console.log("filteredList", incompleteList)
-
   return (
-    <div className={styles.MainContainer}>
+    <div
+      className={
+        openNav
+          ? `${styles.MainContainer} ${styles.MainContainerShortened}`
+          : `${styles.MainContainer} ${styles.MainContainerExpanded}`
+      }
+    >
       <div className={styles.subcontainer}>
         <h1 className={styles.header}>{tableName}</h1>
         <Search handleSearch={handleSearch}></Search>
@@ -92,7 +96,6 @@ export default function MainContainer({
     </div>
   )
 }
-
 MainContainer.propTypes = {
   tableName: PropTypes.string,
   isLoading: PropTypes.bool,
@@ -102,4 +105,5 @@ MainContainer.propTypes = {
   onEditTodo: PropTypes.func,
   editCheck: PropTypes.func,
   handleSort: PropTypes.func,
+  openNav: PropTypes.bool,
 }

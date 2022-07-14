@@ -1,7 +1,8 @@
 import styles from "./Navigation.module.css"
-import { AiOutlineUnorderedList } from "react-icons/ai"
+import { VscCircleFilled } from "react-icons/vsc"
+import PropTypes from "prop-types"
 
-export default function Navigation({ requestNewList }) {
+export default function Navigation({ requestNewList, openNav, toggleNavbar }) {
   const handleDefaultList = () => {
     const todayList = "Today"
     requestNewList(todayList)
@@ -16,23 +17,29 @@ export default function Navigation({ requestNewList }) {
   }
 
   return (
-    <nav className={styles.nav}>
+    <nav className={openNav ? styles.showNav : styles.hideNav}>
       <ul className={styles.container}>
         <li className={styles.item} onClick={handleDefaultList}>
-          <AiOutlineUnorderedList className={styles.icon} size="1rem" />
+          <VscCircleFilled className={styles.icon} size="1.2rem" />
           <span>Today</span>
         </li>
         <li className={styles.item} onClick={handleWorkList}>
-          <AiOutlineUnorderedList className={styles.icon} size="1rem" />
+          <VscCircleFilled className={styles.icon} size="1.2rem" />
           <span>Work</span>
         </li>
         <li className={styles.item} onClick={handlePersonalList}>
-          <AiOutlineUnorderedList className={styles.icon} size="1rem" />
+          <VscCircleFilled className={styles.icon} size="1.2rem" />
           <span>Personal</span>
         </li>
       </ul>
     </nav>
   )
+}
+
+Navigation.propTypes = {
+  requestNewList: PropTypes.func,
+  openNav: PropTypes.bool,
+  toggleNavbar: PropTypes.func,
 }
 
 // {/* <Link to="/workList">Work</Link> */}

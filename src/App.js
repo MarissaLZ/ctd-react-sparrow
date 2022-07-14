@@ -17,19 +17,15 @@ import styles from "./App.module.css"
 import Navigation from "./components/Navigation/Navigation.js"
 import Login from "./components/Login/Login.js"
 import Signup from "./components/Signup/Signup.js"
-import PropTypes from "prop-types"
-
-/*
-Router- component used to encompass all of the diff components in
-the application that will exist in the BrowseRouter system
-Routes-determines where in router systmen where you want to have routes
-*/
+import { Header } from "./components/Header/Header.js"
 
 function App() {
   const [todoList, setTodoList] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
   const [tableName, setTableName] = React.useState("Today")
   const [user, setUser] = React.useState({})
+  const [openNav, setOpenNav] = React.useState(true)
+
   console.log("user", user)
   console.log("todoList", todoList)
 
@@ -97,7 +93,6 @@ function App() {
       setTodoList(newTodoList)
     })
   }
-
   const editTodo = (tableName, id, previousTodo, updatedTodo) => {
     //immediately update todoList locally instead of waiting for server
     setTodoList(
@@ -128,7 +123,7 @@ function App() {
                 ...todo, //copy todo object info via spread
                 fields: {
                   // replace the nested fields object
-                  ...previousTodo.fields, //with the same same one
+                  ...previousTodo.fields, //with the same one
                 },
               }
             } else {
@@ -179,6 +174,8 @@ function App() {
     }
   }
 
+  const toggleNavbar = () => setOpenNav((n) => !n)
+
   return (
     <Router>
       <Routes>
@@ -201,8 +198,19 @@ function App() {
         <Route
           path="home"
           element={
-            <div className={styles.mainContainer}>
-              <Navigation requestNewList={requestNewList} />
+            <div
+              className={
+                openNav
+                  ? `${styles.mainContainer} ${styles.inactiveBackground} `
+                  : `${styles.mainContainer} ${styles.activeBackground} `
+              }
+            >
+              <Header toggleNavbar={toggleNavbar} />
+              <Navigation
+                requestNewList={requestNewList}
+                openNav={openNav}
+                toggleNavbar={toggleNavbar}
+              />
               <MainContainer
                 tableName={tableName}
                 isLoading={isLoading}
@@ -212,6 +220,7 @@ function App() {
                 onEditTodo={editTodo}
                 editCheck={editCheck}
                 handleSort={handleSort}
+                openNav={openNav}
               />
             </div>
           }
@@ -222,17 +231,9 @@ function App() {
 }
 export default App
 
-App.propTypes = {
-  tableName: PropTypes.string,
-  todoList: PropTypes.array,
-  onRemoveTodo: PropTypes.func,
-  onEditTodo: PropTypes.func,
-  editCheck: PropTypes.func,
-}
-
 //there is a glitch/infinite loop if user clicks checkboxes very very fast.
 //If delete is clicked very fast patch request fails AKA not found
-//switch too fast between lists causes errors
+//switching too fast between lists causes errors
 
 // <Router>
 //     <Navigation/>

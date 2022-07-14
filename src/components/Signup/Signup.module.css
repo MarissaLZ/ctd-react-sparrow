@@ -3,17 +3,19 @@
     flex-direction: column;
     justify-content: center;
     background: #303030;
-    height: 100vh
+    height: 100vh;
+    padding: 0 3rem;
 }
-
+.header{
+    margin-bottom: 2rem;
+}
 .formContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     background: #303030;
-    /* height: 100vh */
+    gap: 0.5rem;
 }
-
 .input {
     background: transparent;
     border-radius: 0.2rem;
@@ -22,10 +24,9 @@
     border: 1px solid
 }
 .success {
-    color: green
-    
+    color: rgb(9, 241, 9);
+    margin-bottom: 0.5rem;
 }
-
 .button {
     background: blue;
     color: inherit;
@@ -33,6 +34,8 @@
     border-radius: 0.2rem;
     padding: 0.3rem 0;
     border: none;
+    margin: 1rem 0;
+    cursor: pointer;
 }
 .link {
     color: inherit;

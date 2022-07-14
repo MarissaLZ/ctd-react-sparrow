@@ -45,9 +45,9 @@ export default function Signup() {
 
   return (
     <div className={styles.signupSubcontainer}>
-      <h1>Sign Up</h1>
+      <h1 className={styles.header}>Sign Up</h1>
       {success && (
-        <p className={styles.success}> Account Created. Please go to Login</p>
+        <p className={styles.success}> Account Created. Please Login.</p>
       )}
       <form onSubmit={handleSubmit} className={styles.formContainer}>
         <Input

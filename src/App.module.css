@@ -14,37 +14,49 @@
 body {
     font-family: 'Quicksand', 'Poppins', Georgia, 'Times New Roman', serif;
     font-size: 16px;
-    background: #212121;
+    background: #1f1f1f;
     height: 100vh;
+    width: 100vw;
     color: #FFFFFF;
-    
 }
 .mainContainer {
     height: 100vh;
+    width: 100vw;
     display: grid;
     grid-template-columns: 1fr 6fr;
+    grid-template-rows: 0.5fr 10fr; 
+}
+.activeBackground {
+    background: #1f1f1f;
+}
+.inactiveBackground {
+    background: #1f1f1f;
 }
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100vh;
+    width: 100vw;;
 }
-/*
-@media screen and ( min-width: 500px) {
-    body{
-        display: hidden;
-
+@media screen and (max-width: 900px) {
+    .inactiveBackground {
+        background: #161616;
     }
-    
-
+    .activeBackground {
+        background: #1f1f1f; 
+    }
+}
+@media screen and (max-width: 415px) {
+    body {
+        font-size: 13px;
+    }
 }
 
 
-/* makig something disappear
-visibilty hidden 
-text overflow: clip
-overflow: hidden
 
-white-space: nowrap;
-overflow: hidden;
-*/
+/* space out navbar better
+add user?
+fix login styling and add validation
+ can i make screen inactive so no interction is possible?
+ have nav close when list selected */
