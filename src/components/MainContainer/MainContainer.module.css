@@ -1,17 +1,31 @@
 .MainContainer {
     display: flex;
     flex-direction: column;
-    margin: 5rem 10rem; 
+    align-items: center;
+    padding: 3rem 0; 
+    /* margin: 3rem 0; */
+   /* alternative is justify-content: center;*/
     flex-grow: 1;
 }
+.MainContainerShortened {
+    grid-column: 2/-1;
+    grid-row: 2/-1;
+    opacity: 1;
+}
+.MainContainerExpanded {
+    grid-column: 1/-1;
+    grid-row: 2/-1;
+    opacity: 1;
+}/*changes maincontainer to take up 2 columns when navigation is toggled false. 
+This is better than changing the grid template in App */
 
 .header {
+    font-size: 1.6rem;
     margin-bottom: 3rem;
 }
 .form {
     margin-bottom: 2rem;
 }
-
 .button {
     background: transparent;
     border: solid #ffffff 1px;
@@ -22,10 +36,26 @@
     margin-bottom: 1rem;
     padding: 0.1rem 0.15rem;
 }
-
-
 .icon {
     /* height: 1.2rem;
     width: auto; */
     stroke: #ffffff;
 }
+.subcontainer {
+    /* max-width: 1000px; */
+    width: 80%;
+}
+@media screen and (max-width: 900px) {
+    /* maincontainer will take up both columns and navigation
+     will overlay instead of taking up a column*/
+    .MainContainer {
+        grid-column: 1/-1;
+        grid-row: 2/-1;
+    }
+    .MainContainerShortened {
+        opacity: 0.1;
+    }
+    
+
+}
+   
