@@ -21,7 +21,7 @@ body {
 }
 .mainContainer {
     height: 100vh;
-    width: 100vw;
+    /* width: 100vw;  strange behavior in mobile*/
     display: grid;
     grid-template-columns: 1fr 6fr;
     grid-template-rows: 0.5fr 10fr; 
@@ -37,7 +37,7 @@ body {
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    width: 100vw;;
+    width: 100vw;
 }
 @media screen and (max-width: 900px) {
     .inactiveBackground {
@@ -53,10 +53,8 @@ body {
     }
 }
 
-
-
-/* space out navbar better
-add user?
+/* 
+add user info?
 fix login styling and add validation
- can i make screen inactive so no interction is possible?
- have nav close when list selected */
+can I make screen inactive so no interction is possible?
+Have nav close when list selected */
